@@ -37,13 +37,13 @@ class BotEventHandler extends SimpleEventHandler {
     #[Handler]
     public function handleMessage(Incoming&Message $message): void
     {
+        if(!is_null($this->lastMessage))
+            $this->lastMessage->delete(true);
+
         // delete all messages
         $this->lastMessage = $this->replyChat($message->chatId);
         $this->sleep(1);
         $message->delete(true);
-
-        if(!is_null($this->lastMessage))
-            $this->lastMessage->delete(true);
     }
 
     // #[FilterCommand('start')]
