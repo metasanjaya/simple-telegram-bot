@@ -37,6 +37,8 @@ class BotEventHandler extends SimpleEventHandler {
     public function handleMessage(Incoming&Message $message): void
     {
         // delete all messages
+        $this->replyChat($message->chatId);
+        sleep(1);
         $message->delete(true);
     }
 
@@ -45,6 +47,13 @@ class BotEventHandler extends SimpleEventHandler {
     {
         $this->logger("Command /start received from chat ".$message->chatId." with args: ".json_encode($message->commandArgs));
 
+        $this->replyChat($message->chatId);
+        sleep(1);
+        $message->delete(true);
+    }
+
+    private function replyChat(int $chatId): void
+    {
         $startMessage = $this->bot->startMessage ?? "Hello! I'm a bot. You can use me to do things.";
         $rowButtons = [];
 
@@ -58,7 +67,7 @@ class BotEventHandler extends SimpleEventHandler {
         }
 
         $this->sendMessage(
-            peer: $message->chatId,
+            peer: $chatId,
             message: $startMessage,
             parseMode: ParseMode::MARKDOWN,
             replyMarkup: [
