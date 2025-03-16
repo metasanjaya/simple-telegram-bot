@@ -13,6 +13,7 @@ use function Amp\File\read;
 
 class BotEventHandler extends SimpleEventHandler {
     protected Bot $bot;
+    protected ?Message $lastMessage = null;
 
     public function setBot(Bot $bot) {
         $this->bot = $bot;
@@ -37,22 +38,25 @@ class BotEventHandler extends SimpleEventHandler {
     public function handleMessage(Incoming&Message $message): void
     {
         // delete all messages
-        $this->replyChat($message->chatId);
+        $this->lastMessage = $this->replyChat($message->chatId);
         $this->sleep(1);
         $message->delete(true);
+
+        if(!is_null($this->lastMessage))
+            $this->lastMessage->delete(true);
     }
 
-    #[FilterCommand('start')]
-    public function startCmd(Message $message): void
-    {
-        $this->logger("Command /start received from chat ".$message->chatId." with args: ".json_encode($message->commandArgs));
+    // #[FilterCommand('start')]
+    // public function startCmd(Message $message): void
+    // {
+    //     $this->logger("Command /start received from chat ".$message->chatId." with args: ".json_encode($message->commandArgs));
 
-        $this->replyChat($message->chatId);
-        $this->sleep(1);
-        $message->delete(true);
-    }
+    //     $this->replyChat($message->chatId);
+    //     $this->sleep(1);
+    //     $message->delete(true);
+    // }
 
-    private function replyChat(int $chatId): void
+    private function replyChat(int $chatId): Message
     {
         $startMessage = $this->bot->startMessage ?? "Hello! I'm a bot. You can use me to do things.";
         $rowButtons = [];
@@ -66,7 +70,7 @@ class BotEventHandler extends SimpleEventHandler {
             ];
         }
 
-        $this->sendMessage(
+        return $this->sendMessage(
             peer: $chatId,
             message: $startMessage,
             parseMode: ParseMode::MARKDOWN,
