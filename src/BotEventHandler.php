@@ -38,7 +38,7 @@ class BotEventHandler extends SimpleEventHandler {
     {
         // delete all messages
         $this->replyChat($message->chatId);
-        sleep(1);
+        $this->sleep(1);
         $message->delete(true);
     }
 
@@ -48,7 +48,7 @@ class BotEventHandler extends SimpleEventHandler {
         $this->logger("Command /start received from chat ".$message->chatId." with args: ".json_encode($message->commandArgs));
 
         $this->replyChat($message->chatId);
-        sleep(1);
+        $this->sleep(1);
         $message->delete(true);
     }
 
