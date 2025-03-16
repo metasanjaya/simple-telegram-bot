@@ -1,0 +1,47 @@
+{
+    "app": {
+        "api_id": 12345678,
+        "api_hash": "aadd24234234qedqasdadsaa"
+    },
+    "admins": [
+        "@admintelegram"
+    ],
+    "bots": {
+        "coba1_bot": {
+            "username": "coba1_bot",
+            "name": "Coba 1",
+            "token": "123456789:AAHasdad0XQ544KkhjzeZFID9ks",
+            "startMessage": "Hello, I'm Coba 1 Bot",
+            "buttons": [
+                {
+                    "text": "Button 1",
+                    "url": "https://example.com"
+                },
+                {
+                    "text": "Button 2",
+                    "url": "https://example.com"
+                }
+            ]
+        },
+        "coba2_bot": {
+            "username": "coba2_bot",
+            "name": "Coba 2",
+            "token": "1238372220:AAFLLU_BCZHeHRXWfhk1jCm4RyVmtHtP84I",
+            "startMessage": "Hello, I'm Coba 2 Bot",
+            "buttons": [
+                {
+                    "text": "Button 1",
+                    "url": "https://example.com"
+                },
+                {
+                    "text": "Button 2",
+                    "url": "https://example.com"
+                },
+                {
+                    "text": "Button 3",
+                    "url": "https://example.com"
+                }
+            ]
+        }
+    }
+}
