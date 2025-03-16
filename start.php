@@ -18,6 +18,7 @@ $settings->setAppInfo($appInfo);
 
 foreach ($config["bots"] as $username => $bot) {
     $api = new API("sessions/".$username, $settings);
+    $api->botLogin($bot["token"]);
     $bots[] = $api;
 }
 
