@@ -42,7 +42,6 @@ class BotEventHandler extends SimpleEventHandler {
 
         // delete all messages
         $this->lastMessage = $this->replyChat($message->chatId);
-        $this->sleep(1);
         $message->delete(true);
     }
 
