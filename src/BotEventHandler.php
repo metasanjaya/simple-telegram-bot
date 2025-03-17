@@ -83,7 +83,7 @@ class BotEventHandler extends SimpleEventHandler {
         return $this->sendMessage(
             peer: $chatId,
             message: $startMessage,
-            parseMode: ParseMode::MARKDOWN,
+            parseMode: ParseMode::HTML,
             replyMarkup: [
                 '_' => 'replyInlineMarkup',
                 'rows' => $rowButtons
