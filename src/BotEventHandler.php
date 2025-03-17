@@ -66,10 +66,16 @@ class BotEventHandler extends SimpleEventHandler {
         $rowButtons = [];
 
         foreach ($this->bot->buttons as $button) {
+            $buttonClass = "keyboardButtonWebView";
+
+            if (preg_match("/t\.me/", $button['url'])) {
+                $buttonClass = "keyboardButtonUrl";
+            }
+
             $rowButtons[] = [
                 '_' => 'keyboardButtonRow',
                 'buttons' => [
-                    ['_' => 'keyboardButtonWebView', 'text' => $button['text'], 'url' => $button['url']]
+                    ['_' => $buttonClass, 'text' => $button['text'], 'url' => $button['url']]
                 ]
             ];
         }
